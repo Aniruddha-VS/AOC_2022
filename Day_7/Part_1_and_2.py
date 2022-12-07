@@ -5,7 +5,6 @@ class TreeNode:
         self.files = []
         self.parent = None
 
-    
     def add_file(self, name, size):
         self.files.append((name, size))
     
@@ -33,9 +32,8 @@ class TreeNode:
         if self.children:
             for child in self.children:
                 child.print_tree()
-   
-    def dir_sizes(self):
-        
+            
+    def dir_sizes(self):    
         sum = 0
         for child in self.children:
             directory_sum = child.dir_sizes()
@@ -51,9 +49,7 @@ def dir_sizes_dict(directory, size):
     global DIRECTORY_ARR
     
     DIRECTORY_ARR.append((directory, size))
-            
-            
-            
+                       
 with open("data_prod.txt") as data:
     ##Read data
     input_text = data.readlines()
@@ -84,24 +80,21 @@ for command in commands:
         if command[0] == "dir":
             pass
         else:
-            current_node.add_file(name = command[1], size= int(command[0]))
-            
+            current_node.add_file(name = command[1], size= int(command[0]))        
 DIRECTORY_ARR = []
-
 rootNode.print_tree()
 occupied =rootNode.dir_sizes()
 print(DIRECTORY_ARR)
 sum = 0 
 count = 0
 for name, size in DIRECTORY_ARR:
-    
     if size <= 100000:
         sum += size
         count+=1
     else:
         print(f"DIR: {name}, SUM = {size}")
 
-print(f"Daddy answers is = {sum}, Number of such directries {count}")
+print(f"answer is = {sum}, Number of such directries {count}")
 
 DIRECTORY_ARR.sort(key = lambda x: x[1])
 
